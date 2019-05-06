@@ -6,7 +6,7 @@
 This project is to practice what we're learning in our javascript / jQuery series by asking users for 3 lengths and determining what kind of triangle that makes.
 
 ## Setup / Installation Requirements
-Open the files on your browser
+[Click here](http://bernicecarbaugh.github.io/triangle-tracker/) to view this page on your browser.
 
 ## Known Bugs
 None
