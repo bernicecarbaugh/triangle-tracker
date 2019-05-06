@@ -1,33 +1,27 @@
 // back end logic
 
 var triangleType = function(num1, num2, num3) {
-  var myType;
-  // 3 sides equal -> equilateral
+  // check if 3 sides equal -> equilateral
   if ( num1 === num2 && num2 === num3 ) {
-    myType = "equilateral";
-  // 1st 2 sides equal; if third side is <= sum other 2 then not triangle, else isosceles
-  } else if (num1 === num2 ) {
-    if ( num1 + num2 <= num3 ) {
-      myType = "not a triangle";
-    } else {
-      myType = "isosceles" ;
-    }
-  // last 2 sides equal; if first side is <= sum other 2 then not triangle, else isosceles
-  } else if (num2 === num3) {
-    if ( num2 + num3 <= num1 ) {
-      myType = "not a triangle";
-    } else {
-      myType = "isosceles" ;
-    }
-  // No sides equal; if one side is <= sum of other 2 then not triangle, else isosceles
+    return "equilateral";
+  // check if 2 sides are shorter than third side (call helper function) -> not a triangle
+  } else if ( !isTriangle(num1, num2, num3) ) {
+    return "not a triangle";
+  // check if any 2 sides are the same -> isosceles
+  } else if (num1 === num2 || num2 === num3 || num1 === num3) {
+    return "isosceles";
+  // not any of the above -> scalene
   } else {
-    if (num1 + num2 <= num3 || num2 + num3 <= num1 || num1 + num3 <= num2) {
-      myType = "not a triangle";
-    } else {
-      myType = "scalene" ;
-    }
+    return "scalene";
   }
-  return myType ;
+}
+
+var isTriangle = function(num1, num2, num3) {
+  if (num1 + num2 <= num3 || num2 + num3 <= num1 || num1 + num3 <= num2 ) {
+    return false ;
+  } else {
+    return true ;
+  }
 }
 
 // front-end logic
@@ -38,29 +32,29 @@ $(document).ready(function() {
     // remove traces of previous runs
     $("#output").text("");
     $("#output").removeClass("well");
-    $("#div-side1").removeClass("has-error");
-    $("#div-side2").removeClass("has-error");
-    $("#div-side3").removeClass("has-error");
 
     // get user input; validate
     var num1 = parseInt($("input#side1").val());
     var num2 = parseInt($("input#side2").val());
     var num3 = parseInt($("input#side3").val());
-    if ( num1 && num2 && num3 ) {
+    if ( isValid(num1, "div-side1") && isValid(num2, "div-side2") && isValid(num3, "div-side3") ) {
       $("#output").addClass("well");
       $("#output").text("Your triangle is " + triangleType(num1, num2, num3) + ".");
     } else {
-      alert ("Please enter valid numbers.");
-      if ( !num1 ) {
-        $("#div-side1").addClass("has-error");
-      }
-      if ( !num2 ) {
-        $("#div-side2").addClass("has-error");
-      }
-      if ( !num3 ) {
-        $("#div-side3").addClass("has-error");
-      }
+      alert ("Please enter valid numbers.");    
     }
   })
+
+  // check if passed input is valid; if valid, remove has-error class; else add has-error class 
+  var isValid = function(numInput, domID) {
+    if ( numInput ) {
+      $("#" + domID).removeClass("has-error");
+      return true;
+    } else {
+      $("#" + domID).addClass("has-error");
+      return false;
+    }
+  }
+
 })
 
