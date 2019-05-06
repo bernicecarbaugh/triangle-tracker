@@ -1,0 +1,39 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+      <script src="js/jquery-3.4.1.js"></script>
+      <script src="js/scripts.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">  
+    <link href="css/styles.css" rel="stylesheet" type="text/css">  
+    <title>Bernice's Triangle Tracker</title>
+  </head>
+
+
+  <body>
+
+    <div class="container">
+      <h2>Bernice's Triangle Tracker</h2>
+      <h4>Enter the dimensions of your triangle and click enter or the Go button to see what kind of triangle it is.</h4>
+      <form id="input">
+        <div id="div-side1" class="form-group">
+          <label for="side1" class="control-label">Enter length of side 1</label>
+          <input id="side1" class="form-control" type="number">
+        </div>
+        
+        <div id="div-side2" class="form-group">
+          <label for="side2" class="control-label">Enter length of side 2</label>
+          <input id="side2" class="form-control" type="number">
+        </div>
+
+        <div id="div-side3" class="form-group">
+          <label for="side3" class="control-label">Enter length of side 3</label>
+          <input id="side3" class="form-control" type="number">
+        </div>
+
+        <button type="submit" class="btn">Go</button>
+      </form>
+      
+      <p><div id="output"></div></p>
+    </div>
+  </body>
+</html>
